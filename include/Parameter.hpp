@@ -7,6 +7,7 @@
 
 #endif //PARAMETER_HPP
 
+#pragma once
 class Parameter {
 public:
     Parameter();

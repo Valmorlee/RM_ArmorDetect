@@ -3,12 +3,16 @@
 //
 
 #include "function.hpp"
+
+#include <Parameter.hpp>
+
 #include "tool.hpp"
 #include "Center.hpp"
 #include "LightDescriptor.hpp"
 #include<bits/stdc++.h>
 
 double light_min_area = 1000;
+Parameter param;
 
 int func_colorDetect(const cv::Mat &img, cv::Mat &mask, int color) {
     return 1;
@@ -31,11 +35,19 @@ void func_armorDetect(const cv::Mat &img) {
     std::vector<std::vector<cv::Point>> contours;
     cv::findContours(img_binary,contours,cv::RETR_EXTERNAL,cv::CHAIN_APPROX_SIMPLE);
 
+    std::vector<LightDescriptor> lightInfos;
     std::vector<cv::RotatedRect> rotated_rects;
     for (const auto & contour :contours) {
-        auto rotated_rect = cv::minAreaRect(contour);
-        //面积过小过滤
-        if (rotated_rect.size.area() < light_min_area) continue;
+        double lightContoursArea = cv::contourArea(contour);
+        //面积小于阈值过滤
+        if (lightContoursArea < param.light_min_area) continue;
+
+        cv::RotatedRect rotated_rect = cv::fitEllipse(contour);
+
+        //长宽比过大过滤
+        if (rotated_rect.size.width / rotated_rect.size.height > param.light_max_ratio) continue;
+        //轮廓面积与椭圆面积比小于阈值过滤
+        if (lightContoursArea / rotated_rect.size.area() < param.light_contour_min_solidity) continue;
         rotated_rects.emplace_back(rotated_rect);
     }
 

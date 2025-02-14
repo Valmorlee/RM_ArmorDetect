@@ -1,7 +1,7 @@
 //
 // Created by valmorx on 25-2-14.
 //
-
+#pragma once
 #ifndef CENTER_HPP
 #define CENTER_HPP
 

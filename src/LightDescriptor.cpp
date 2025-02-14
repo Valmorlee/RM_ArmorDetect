@@ -2,7 +2,7 @@
 // Created by valmorx on 25-2-14.
 //
 
-
+#pragma once
 #include "LightDescriptor.hpp"
 #include "tool.hpp"
 #include "function.hpp"

@@ -7,6 +7,7 @@
 
 #endif //LIGHTDESCRIPTOR_HPP
 
+#pragma once
 #include "tool.hpp"
 #include "function.hpp"
 #include "Center.hpp"
