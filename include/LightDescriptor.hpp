@@ -24,9 +24,9 @@ public:
 
 private:
 
-    int color;
-    int ll_x,ll_y,lr_x,lr_y;
-    int rr_x,rr_y,rl_x,rl_y;
+    //int color;
+    double lu_x,lu_y,ru_x,ru_y; // 左上x，左上y，右上x，右上y
+    double rd_x,rd_y,ld_x,ld_y; // 右下x，右下y，左下x，左下y
 
     Center center;
 

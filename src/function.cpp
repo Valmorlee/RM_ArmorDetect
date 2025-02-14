@@ -4,6 +4,8 @@
 
 #include "function.hpp"
 #include "tool.hpp"
+#include "Center.hpp"
+#include "LightDescriptor.hpp"
 #include<bits/stdc++.h>
 
 double light_min_area = 1000;

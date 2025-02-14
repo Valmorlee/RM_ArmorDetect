@@ -11,7 +11,6 @@
 #include<opencv2/opencv.hpp>
 
 //显示调试图像
-void ims(const cv::Mat img,std::string name="img_TEMP");
 
 //画点
 void drawPoint(const cv::Mat &img, const std::vector<cv::Point> &points);
