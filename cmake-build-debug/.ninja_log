@@ -1,9 +1,15 @@
 # ninja log v6
-0	45	1739468740954044479	build.ninja	b73b0dd8bf5e4457
-1	638	1739467462706216942	CMakeFiles/RM_ArmorDetect.dir/main.cpp.o	b90247c52d8da19f
-1	638	1739467462706216942	CMakeFiles/RM_ArmorDetect.dir/src/TEMP.cpp.o	e977ab642ad14391
-1	230	1739468269903927912	RM_ArmorDetect	b028f13990c20d85
+1	1416	1739528200660620979	CMakeFiles/RM_ArmorDetect.dir/main.cpp.o	b90247c52d8da19f
+3	1560	1739529150076809231	CMakeFiles/RM_ArmorDetect.dir/src/tool.cpp.o	b4c2c8ef28225a39
+7	75	1739544675866221005	build.ninja	b73b0dd8bf5e4457
+3	1445	1739527473833590921	CMakeFiles/Local_Lib_Static.dir/src/tool.cpp.o	d7cf4240e7fbfdb5
 1	606	1739468508090308210	CMakeFiles/Local_Lib_Shared.dir/src/TEMP.cpp.o	af8142ec99ec8b7e
-606	637	1739468508695304238	/home/valmorx/CLionProjects/RM_ArmorDetect/lib/libLocal_Lib.so	316b09eb810e3586
+2	1502	1739527473832590925	CMakeFiles/Local_Lib_Static.dir/src/function.cpp.o	6bae256e1a7eb83c
+1640	1757	1739542208398608705	RM_ArmorDetect	935f188006d4231b
 1	642	1739468511563285416	CMakeFiles/Local_Lib_Static.dir/src/TEMP.cpp.o	d080cd6f1a408395
-642	653	1739468512204281211	/home/valmorx/CLionProjects/RM_ArmorDetect/lib/libLocal_Lib.a	1c242d5de9d77bb6
+2	1462	1739527468442613194	CMakeFiles/Local_Lib_Shared.dir/src/tool.cpp.o	3dc7b5e8af27e287
+1502	1514	1739527475332584728	/home/valmorx/CLionProjects/RM_ArmorDetect/lib/libLocal_Lib.a	6353f3d1810a803a
+2	1516	1739527468442613194	CMakeFiles/Local_Lib_Shared.dir/src/function.cpp.o	2586c3a6f22794ea
+1516	1559	1739527469956606938	/home/valmorx/CLionProjects/RM_ArmorDetect/lib/libLocal_Lib.so	3ce6e377fddf81ae
+2	1639	1739542206760608391	CMakeFiles/RM_ArmorDetect.dir/src/function.cpp.o	e40f954f0f49d71
+1	638	1739467462706216942	CMakeFiles/RM_ArmorDetect.dir/src/TEMP.cpp.o	e977ab642ad14391

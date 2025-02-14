@@ -1,0 +1,7 @@
+
+class:
+    center
+    LightDescriptor
+    armor
+    armorTracker
+    armorDetector
