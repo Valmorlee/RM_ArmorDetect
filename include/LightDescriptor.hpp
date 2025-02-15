@@ -8,9 +8,6 @@
 #endif //LIGHTDESCRIPTOR_HPP
 
 #pragma once
-#include "tool.hpp"
-#include "function.hpp"
-#include "Center.hpp"
 #include <opencv2/opencv.hpp>
 #include <bits/stdc++.h>
 
@@ -18,17 +15,23 @@ class LightDescriptor{
 
 public:
     LightDescriptor();
-    LightDescriptor(std::vector<cv::Point2f> points);
+    //LightDescriptor(LightDescriptor &light);
     LightDescriptor(cv::RotatedRect rect);
     ~LightDescriptor();
 
+    void printInfo();
+    void drawLight(cv::Mat &img);
 
-private:
 
     //int color;
     double lu_x,lu_y,ru_x,ru_y; // 左上x，左上y，右上x，右上y
     double rd_x,rd_y,ld_x,ld_y; // 右下x，右下y，左下x，左下y
+    std::vector<cv::Point2f> pts;
+    cv::Point2f center;
 
-    Center center;
+    double width;
+    double length;
+    double area;
+    double angle;
 
 };

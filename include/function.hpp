@@ -11,6 +11,6 @@
 #include<opencv2/opencv.hpp>
 
 //颜色识别
-int func_colorDetect(const cv::Mat &img, cv::Mat &mask, int color);
+cv::Mat func_colorDetect(const cv::Mat &img);
 
 void func_armorDetect(const cv::Mat &img);
