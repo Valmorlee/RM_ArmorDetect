@@ -4,13 +4,13 @@
 
 #include "tool.hpp"
 #include "function.hpp"
-#include "Center.hpp"
 #include "LightDescriptor.hpp"
 #include<bits/stdc++.h>
 #include<opencv2/opencv.hpp>
 
 int main() {
-    cv::Mat img = cv::imread("../PhotoLib/Armor02.jpg"); // 读取图像
+    cv::Mat img = cv::imread("../PhotoLib/Armor03.jpg"); // 读取图像
+    cv::imshow("img", img);
 
     if (img.empty()) {
         std::cout << "Empty" << std::endl;
@@ -18,4 +18,6 @@ int main() {
     }
 
     func_armorDetect(img);
+
+    cv::waitKey(0);
 }

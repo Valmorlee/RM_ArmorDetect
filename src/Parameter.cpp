@@ -9,12 +9,22 @@
 #include "function.hpp"
 
 Parameter::Parameter() {
-    light_min_area = 1000; //最小 [灯条矩形] 面积筛选参数
-    light_max_ratio = 0.3; //最大 [灯条矩形] 长宽比
+
+
+    light_min_area = 200; //最小 [灯条矩形] 面积筛选参数
+    light_max_ratio = 0.5; //最大 [灯条矩形] 长宽比
     light_contour_min_solidity = 0.1; //最小 [灯条轮廓椭圆] 拟合区域占比（凸度）
     light_area_extend_ratio = 1.2; //灯条面积扩展比
+    light_max_angle_diff = 0.3; //最大灯条角度差
+    light_max_angle_diff_ratio = 0.3; //最大灯条角度差比
+    light_max_x_diff_ratio = 0.3; //最大灯条x轴差比
+    light_max_y_diff_ratio = 0.3; //最大灯条y轴差比
+
     enemy_flag = 1; //发现敌方状态
     enemy_color = 0; //默认为蓝色
+
+    armor_min_aspect_ratio = 0.5;
+    armor_max_aspect_ratio = 2.5;
 }
 
 void Parameter::set_enemy_color(int color) {

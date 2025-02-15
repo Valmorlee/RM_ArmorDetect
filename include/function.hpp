@@ -13,4 +13,4 @@
 //颜色识别
 cv::Mat func_colorDetect(const cv::Mat &img);
 
-void func_armorDetect(cv::Mat &img);
+void func_armorDetect(const cv::Mat &img);
