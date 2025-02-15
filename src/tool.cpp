@@ -8,7 +8,30 @@
 #include<bits/stdc++.h>
 #include <opencv2/opencv.hpp>
 
+#define BIG_ARMOR 1
+#define SMALL_ARMOR 0
+#define UNKNOWN_ARMOR -1
+
 Parameter param_tool;
+
+void adjustRec(cv::RotatedRect& rect)
+{
+    float& width = rect.size.width;
+    float& height = rect.size.height;
+    float& angle = rect.angle;
+
+    while(angle >= 90.0) angle -= 180.0;
+    while(angle < -90.0) angle += 180.0;
+
+    if(angle >= 45.0){
+        std::swap(width, height);
+        angle -= 90.0;
+    }else if(angle < -45.0){
+        std::swap(width, height);
+        angle += 90.0;
+    }
+
+}
 
 // 坐标两点间距离
 double distance(const cv::Point2f &p1, const cv::Point2f &p2)
@@ -50,8 +73,8 @@ void filterContours(std::vector<std::vector<cv::Point> > &contours, std::vector<
         if (lightContoursArea < param_tool.light_min_area) continue;
         //椭圆拟合
         cv::RotatedRect rotated_rect = cv::fitEllipse(contour);
-
-
+        //角度修正
+        adjustRec(rotated_rect);
         //长宽比过大过滤
         if (rotated_rect.size.width / rotated_rect.size.height > param_tool.light_max_ratio) continue;
         //轮廓面积与椭圆面积比小于阈值过滤
@@ -102,7 +125,15 @@ std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInf
             double dis_ratio = dis / avgLen;
 
             //筛选符合条件的灯条
+            if (yDiff_Ratio > param_tool.light_max_y_diff_ratio ||
+                xDiff_Ratio > param_tool.light_min_x_diff_ratio ||
+                dis_ratio > param_tool.armor_max_aspect_ratio||
+                dis_ratio < param_tool.armor_min_aspect_ratio) continue;
 
+            //确认装甲板类型
+            int armor_flag = dis_ratio > param_tool.armor_type_big_ratio ? BIG_ARMOR : SMALL_ARMOR;
+
+            //
         }
     }
     return {};

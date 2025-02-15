@@ -17,7 +17,7 @@ Parameter::Parameter() {
     light_area_extend_ratio = 1.2; //灯条面积扩展比
     light_max_angle_diff = 0.3; //最大灯条角度差
     light_max_angle_diff_ratio = 0.3; //最大灯条角度差比
-    light_max_x_diff_ratio = 0.3; //最大灯条x轴差比
+    light_min_x_diff_ratio = 0.3; //最大灯条x轴差比
     light_max_y_diff_ratio = 0.3; //最大灯条y轴差比
 
     enemy_flag = 1; //发现敌方状态
@@ -25,6 +25,7 @@ Parameter::Parameter() {
 
     armor_min_aspect_ratio = 0.5; //灯条相距距离与长度最大比值
     armor_max_aspect_ratio = 2.5; //灯条相距距离与长度最小比值
+    armor_type_big_ratio = 1.5; //装甲板类型比值参数
 }
 
 void Parameter::set_enemy_color(int color) {

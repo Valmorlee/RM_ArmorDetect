@@ -43,3 +43,13 @@
 1836	1856	1739627836834164723	/home/valmorx/CLionProjects/RM_ArmorDetect/lib/libLocal_Lib.a	41ba8885020c832c
 2	1577	1739627872334067674	CMakeFiles/RM_ArmorDetect.dir/src/tool.cpp.o	b4c2c8ef28225a39
 1577	1680	1739627873909063382	RM_ArmorDetect	1bfb79040597d90b
+2	1496	1739629033492217857	CMakeFiles/RM_ArmorDetect.dir/src/Parameter.cpp.o	18a60ab0a74f616f
+2	1561	1739629033492217857	CMakeFiles/RM_ArmorDetect.dir/src/function.cpp.o	e40f954f0f49d71
+2	1620	1739629033492217857	CMakeFiles/RM_ArmorDetect.dir/src/tool.cpp.o	b4c2c8ef28225a39
+1620	1717	1739629035110212452	RM_ArmorDetect	1bfb79040597d90b
+2	1653	1739630183139326072	CMakeFiles/RM_ArmorDetect.dir/src/Parameter.cpp.o	18a60ab0a74f616f
+2	1699	1739630183139326072	CMakeFiles/RM_ArmorDetect.dir/main.cpp.o	b90247c52d8da19f
+2	1719	1739630183139326072	CMakeFiles/RM_ArmorDetect.dir/src/LightDescriptor.cpp.o	b1fe72806350247e
+2	1795	1739630183139326072	CMakeFiles/RM_ArmorDetect.dir/src/function.cpp.o	e40f954f0f49d71
+2	1877	1739630183139326072	CMakeFiles/RM_ArmorDetect.dir/src/tool.cpp.o	b4c2c8ef28225a39
+1877	1983	1739630185014316562	RM_ArmorDetect	1bfb79040597d90b

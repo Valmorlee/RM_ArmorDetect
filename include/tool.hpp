@@ -12,6 +12,8 @@
 #include<opencv2/opencv.hpp>
 #include "LightDescriptor.hpp"
 #include"ArmorDescriptor.hpp"
+//调整倾斜角度
+void adjustRec(cv::RotatedRect& rect);
 
 //坐标两点间距离
 double distance(const cv::Point &p1, const cv::Point &p2);

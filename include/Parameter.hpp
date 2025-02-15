@@ -26,7 +26,7 @@ public:
     double light_max_angle_diff; //灯条最大角度差
     double light_max_angle_diff_ratio; //灯条最大角度差比
     double light_max_y_diff_ratio; //灯条最大y轴差比
-    double light_max_x_diff_ratio; //灯条最大x轴差比
+    double light_min_x_diff_ratio; //灯条最大x轴差比
 
 
     // 状态指标相关参数
@@ -35,5 +35,6 @@ public:
     // 装甲板相关参数
     double armor_max_aspect_ratio; //灯条相距距离与长度最大比值
     double armor_min_aspect_ratio; //灯条相距距离与长度最小比值
+    double armor_type_big_ratio; //装甲板类型比值参数
 
 };
