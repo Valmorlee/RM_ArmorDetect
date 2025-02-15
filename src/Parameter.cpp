@@ -13,6 +13,12 @@ Parameter::Parameter() {
     light_max_ratio = 0.3; //最大 [灯条矩形] 长宽比
     light_contour_min_solidity = 0.1; //最小 [灯条轮廓椭圆] 拟合区域占比（凸度）
     light_area_extend_ratio = 1.2; //灯条面积扩展比
+    enemy_flag = 1; //发现敌方状态
+    enemy_color = 0; //默认为蓝色
+}
+
+void Parameter::set_enemy_color(int color) {
+    this->enemy_color=color;
 }
 
 Parameter::~Parameter() = default;

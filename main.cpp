@@ -10,13 +10,12 @@
 #include<opencv2/opencv.hpp>
 
 int main() {
-    cv::Mat img = cv::imread("../PhotoLib/Armor01.jpg"); // 读取图像
+    cv::Mat img = cv::imread("../PhotoLib/Armor02.jpg"); // 读取图像
 
     if (img.empty()) {
-        std::cout << "Could not open or find the image" << std::endl;
+        std::cout << "Empty" << std::endl;
         return -1;
     }
 
-    cv::imshow("img",img);
     func_armorDetect(img);
 }
