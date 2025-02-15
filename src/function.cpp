@@ -25,7 +25,7 @@ cv::Mat func_colorDetect(const cv::Mat &img) {
     return output;
 }
 
-void func_armorDetect(const cv::Mat &img) {
+void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
     cv::Mat img_origin=img.clone();
     cv::Mat img_gray,img_binary,img_result=img.clone();
 
@@ -48,7 +48,7 @@ void func_armorDetect(const cv::Mat &img) {
 
     std::vector<LightDescriptor> lightInfos;
 
-    filterContours(contours,lightInfos);
+    filterContours(contours,lightInfos,detector);
     //debug输出
     for (LightDescriptor x:lightInfos) {
         x.printInfo();

@@ -1,13 +1,12 @@
 //
 // Created by valmorx on 25-2-15.
 //
-
+#pragma once
 #ifndef PARAMETER_HPP
 #define PARAMETER_HPP
 
 #endif //PARAMETER_HPP
 
-#pragma once
 class Parameter {
 public:
     Parameter();
@@ -35,6 +34,6 @@ public:
     // 装甲板相关参数
     double armor_max_aspect_ratio; //灯条相距距离与长度最大比值
     double armor_min_aspect_ratio; //灯条相距距离与长度最小比值
-    double armor_type_big_ratio; //装甲板类型比值参数
-
+    double armor_type_big_ratio; //大装甲板类型比值参数
+    double armor_type_small_ratio; //小装甲板类型比值参数
 };
