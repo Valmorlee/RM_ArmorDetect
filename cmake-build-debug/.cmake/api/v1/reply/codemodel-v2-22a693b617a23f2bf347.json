@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "RM_ArmorDetect",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Local_Lib_Shared::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Local_Lib_Shared-Debug-f4f9ff829fa1a0a1f1cb.json",
+					"name" : "Local_Lib_Shared",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Local_Lib_Static::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Local_Lib_Static-Debug-eb56fdbb653f7ce5ef3a.json",
+					"name" : "Local_Lib_Static",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "RM_ArmorDetect::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-RM_ArmorDetect-Debug-63c2d420ba6d870b4847.json",
+					"name" : "RM_ArmorDetect",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/valmorx/CLionProjects/RM_ArmorDetect/cmake-build-debug",
+		"source" : "/home/valmorx/CLionProjects/RM_ArmorDetect"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

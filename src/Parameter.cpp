@@ -23,8 +23,8 @@ Parameter::Parameter() {
     enemy_flag = 1; //发现敌方状态
     enemy_color = 0; //默认为蓝色
 
-    armor_min_aspect_ratio = 0.5;
-    armor_max_aspect_ratio = 2.5;
+    armor_min_aspect_ratio = 0.5; //灯条相距距离与长度最大比值
+    armor_max_aspect_ratio = 2.5; //灯条相距距离与长度最小比值
 }
 
 void Parameter::set_enemy_color(int color) {
