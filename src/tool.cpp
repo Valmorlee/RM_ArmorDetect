@@ -73,18 +73,25 @@ std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInf
         return a.center.x < b.center.x;
     });
 
+    int pairs1 = 0,pairs2 = 0,pairs3 = 0;
+
     for (int i=0;i<lightInfos.size();i++) {
         for (int j=i+1;j<lightInfos.size();j++) {
             const LightDescriptor &leftlight = lightInfos[i];
             const LightDescriptor &rightlight = lightInfos[j];
+
+
+            pairs1++;
 
             //角差
             double angleDiff = abs(leftlight.angle - rightlight.angle);
             //长度差比率
             double LenDiff_Ratio = abs(leftlight.length - rightlight.length) / std::max(leftlight.length, rightlight.length);
 
-            if (angleDiff < detector.param.light_max_angle_diff ||
-                LenDiff_Ratio < detector.param.light_max_angle_diff_ratio) continue;
+            if (angleDiff > detector.param.light_max_angle_diff ||
+                LenDiff_Ratio > detector.param.light_max_angle_diff_ratio) continue;
+
+            pairs2++;
 
             //左右灯条中心点间距离
             double dis = distance(leftlight.center, rightlight.center);
@@ -103,16 +110,50 @@ std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInf
             double dis_ratio = dis / avgLen;
 
             //筛选符合条件的灯条
-            if (yDiff_Ratio > detector.param.light_max_y_diff_ratio ||
-                xDiff_Ratio > detector.param.light_min_x_diff_ratio ||
-                dis_ratio > detector.param.armor_max_aspect_ratio||
-                dis_ratio < detector.param.armor_min_aspect_ratio) continue;
+             if (yDiff_Ratio > detector.param.light_max_y_diff_ratio ||
+                 xDiff_Ratio < detector.param.light_min_x_diff_ratio ||
+                 dis_ratio > detector.param.armor_max_aspect_ratio||
+                 dis_ratio < detector.param.armor_min_aspect_ratio) {
+
+                 continue;
+             }
+
+            pairs3++;
 
             //确认装甲板类型
             int armor_flag = dis_ratio > detector.param.armor_type_big_ratio ? BIG_ARMOR : SMALL_ARMOR;
 
-            //
+            //Score
+            double rotationScore = 100;
+
+            // cv::Mat img = cv::Mat::ones(cv::Size(200,200),CV_8UC3);
+            // cv::circle(img,leftlight.center,2,cv::Scalar(0,0,255),-1);
+            // cv::circle(img,rightlight.center,2,cv::Scalar(0,0,255),-1);
+            // cv::imshow("debug",img);
+            // cv::waitKey(0);
+
+            ArmorDescriptor armor(leftlight, rightlight,armor_flag,detector._grayImg,rotationScore,detector.param);
+
+            armors.emplace_back(armor);
+            //break;
         }
     }
-    return {};
+    std::cout << "初始遴选个数： " << pairs1 << std::endl
+              << "条件2遴选后个数： " << pairs2 << std::endl
+              << "条件3遴选后个数： " << pairs3 << std::endl;
+    return armors;
+}
+
+void drawArmor(ArmorDetector &detector,cv::Mat &img) {
+    for (int i=0;i<detector._armors.size();i++) {
+        std::vector<cv::Point2i> points;
+        for (int j=0;j<4;j++) {
+            points.emplace_back(cv::Point(static_cast<int>(detector._armors[i].vertex[j].x),
+                                          static_cast<int>(detector._armors[i].vertex[j].y)));
+
+        }
+
+        cv::polylines(img, points, true, cv::Scalar(0, 255, 0), 2,8,0);
+    }
+    cv::imshow("armors", img);
 }

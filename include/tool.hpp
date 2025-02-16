@@ -24,3 +24,6 @@ void filterContours(std::vector<std::vector<cv::Point>> &contours, std::vector<L
 
 //筛选装甲板
 std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInfos,ArmorDetector &detector);
+
+//画装甲板：debug
+void drawArmor(ArmorDetector &detector,cv::Mat &img);

@@ -17,8 +17,8 @@ Parameter::Parameter() {
     light_area_extend_ratio = 1.1; //灯条面积扩展比
     light_max_angle_diff = 7; //最大灯条角度差
     light_max_angle_diff_ratio = 0.2; //最大灯条角度差比
-    light_min_x_diff_ratio = 2; //最大灯条x轴差比
-    light_max_y_diff_ratio = 0.5; //最大灯条y轴差比
+    light_min_x_diff_ratio = 0.5; //最小灯条x轴差比
+    light_max_y_diff_ratio = 2; //最大灯条y轴差比
 
     enemy_flag = 1; //发现敌方状态
     enemy_color = 0; //默认为蓝色
@@ -27,6 +27,7 @@ Parameter::Parameter() {
     armor_max_aspect_ratio = 5; //灯条相距距离与长度最小比值
     armor_type_big_ratio = 3.2; //大装甲板类型比值参数
     armor_type_small_ratio = 2; //小装甲板类型比值参数
+    area_normalized_base = 1000; //装甲板面积归一化基准参数
 }
 
 void Parameter::set_enemy_color(int color) {

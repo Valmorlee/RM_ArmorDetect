@@ -17,6 +17,10 @@
 class ArmorDetector {
 public:
 
+    ArmorDetector() {
+
+    }
+
     void init() {
 
     }

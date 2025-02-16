@@ -63,6 +63,15 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
 
     cv::imshow("img_origin",img_origin);
 
+    //匹配灯条对
+    detector._armors=filterArmors(lightInfos,detector);
+    if (detector._armors.empty()) {
+        std::cout << "armors empty!" << std::endl;
+        return;
+    }
+
+    drawArmor(detector,img_origin);
+
     cv::waitKey(0);
 
 }

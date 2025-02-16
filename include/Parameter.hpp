@@ -36,4 +36,5 @@ public:
     double armor_min_aspect_ratio; //灯条相距距离与长度最小比值
     double armor_type_big_ratio; //大装甲板类型比值参数
     double armor_type_small_ratio; //小装甲板类型比值参数
+    double area_normalized_base; //装甲板面积归一化基准参数
 };

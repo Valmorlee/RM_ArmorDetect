@@ -21,6 +21,7 @@ public:
 
     void printInfo();
     void drawLight(cv::Mat &img);
+    cv::RotatedRect rec() const;
 
 
     //int color;
