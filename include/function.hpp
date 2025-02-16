@@ -4,6 +4,7 @@
 #pragma once
 #ifndef FUNCTION_HPP
 #define FUNCTION_HPP
+#include <ArmorDetector.hpp>
 
 #endif //FUNCTION_HPP
 
@@ -13,4 +14,4 @@
 //颜色识别
 cv::Mat func_colorDetect(const cv::Mat &img);
 
-void func_armorDetect(const cv::Mat &img);
+void func_armorDetect(const cv::Mat &img,ArmorDetector &detector);

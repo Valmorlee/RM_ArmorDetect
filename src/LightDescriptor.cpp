@@ -29,7 +29,6 @@ LightDescriptor::LightDescriptor(cv::RotatedRect rect) {
     this->area = rect.size.area();
     this->angle = rect.angle;
 
-
 }
 
 // LightDescriptor::LightDescriptor(LightDescriptor &light) {
@@ -68,4 +67,9 @@ void LightDescriptor::drawLight(cv::Mat &img) {
     cv::line(img, points[2], points[3], cv::Scalar(0, 0, 255), 2);
     cv::line(img, points[3], points[0], cv::Scalar(0, 0, 255), 2);
 
+}
+
+cv::RotatedRect LightDescriptor::rec() const
+{
+    return cv::RotatedRect(center, cv::Size2f(width, length), angle);
 }

@@ -3,6 +3,9 @@
 //
 
 #include "tool.hpp"
+
+#include <ArmorDetector.hpp>
+
 #include "LightDescriptor.hpp"
 #include <Parameter.hpp>
 #include<bits/stdc++.h>
@@ -12,7 +15,7 @@
 #define SMALL_ARMOR 0
 #define UNKNOWN_ARMOR -1
 
-Parameter param_tool;
+//Parameter param_tool;
 
 void adjustRec(cv::RotatedRect& rect)
 {
@@ -39,74 +42,56 @@ double distance(const cv::Point2f &p1, const cv::Point2f &p2)
     return sqrt(pow(p1.x-p2.x,2)+pow(p1.y-p2.y,2));
 }
 
-// 绘制轮廓点
-void drawPoint(const cv::Mat &img, const std::vector<cv::Point> &points)
-{
-    for(cv::Point point:points){
-        cv::circle(img, point, 1, cv::Scalar(0, 0, 255), 3);
-    }
-}
 
-void drawPoint(const cv::Mat &img, const std::vector<cv::Point2f> &points)
-{
-    for(cv::Point2f point:points){
-        cv::circle(img, point, 1, cv::Scalar(0, 0, 255), 3);
-    }
-}
-
-// 修改亮度&对比度
-void modifyHighlight(const cv::Mat &img) {
-    modifyHighlight(img, 1.5, -200);
-}
-
-void modifyHighlight(const cv::Mat &img,double alpha, double beta) {
-    img.convertTo(img, -1, alpha, beta);
-}
-
-
-
-void filterContours(std::vector<std::vector<cv::Point> > &contours, std::vector<LightDescriptor> &lightInfos) {
+void filterContours(std::vector<std::vector<cv::Point> > &contours, std::vector<LightDescriptor> &lightInfos, ArmorDetector &detector) {
     for (const auto & contour :contours) {
         double lightContoursArea = cv::contourArea(contour);
 
         //面积小于阈值过滤
-        if (lightContoursArea < param_tool.light_min_area) continue;
+        if (lightContoursArea < detector.param.light_min_area) continue;
         //椭圆拟合
         cv::RotatedRect rotated_rect = cv::fitEllipse(contour);
         //角度修正
         adjustRec(rotated_rect);
         //长宽比过大过滤
-        if (rotated_rect.size.width / rotated_rect.size.height > param_tool.light_max_ratio) continue;
+        if (rotated_rect.size.width / rotated_rect.size.height > detector.param.light_max_ratio) continue;
         //轮廓面积与椭圆面积比小于阈值过滤
-        if (lightContoursArea / rotated_rect.size.area() < param_tool.light_contour_min_solidity) continue;
+        if (lightContoursArea / rotated_rect.size.area() < detector.param.light_contour_min_solidity) continue;
         //扩大识别区域
-        rotated_rect.size.width *= param_tool.light_area_extend_ratio;
-        rotated_rect.size.height *= param_tool.light_area_extend_ratio;
+        rotated_rect.size.width *= detector.param.light_area_extend_ratio;
+        rotated_rect.size.height *= detector.param.light_area_extend_ratio;
 
         lightInfos.emplace_back(LightDescriptor(rotated_rect));
     }
 }
 
 
-std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInfos) {
+std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInfos, ArmorDetector &detector) {
     std::vector<ArmorDescriptor> armors;
 
     std::sort(lightInfos.begin(), lightInfos.end(), [](const LightDescriptor &a, const LightDescriptor &b) {
         return a.center.x < b.center.x;
     });
 
+    int pairs1 = 0,pairs2 = 0,pairs3 = 0;
+
     for (int i=0;i<lightInfos.size();i++) {
         for (int j=i+1;j<lightInfos.size();j++) {
             const LightDescriptor &leftlight = lightInfos[i];
             const LightDescriptor &rightlight = lightInfos[j];
+
+
+            pairs1++;
 
             //角差
             double angleDiff = abs(leftlight.angle - rightlight.angle);
             //长度差比率
             double LenDiff_Ratio = abs(leftlight.length - rightlight.length) / std::max(leftlight.length, rightlight.length);
 
-            if (angleDiff < param_tool.light_max_angle_diff ||
-                LenDiff_Ratio < param_tool.light_max_angle_diff_ratio) continue;
+            if (angleDiff > detector.param.light_max_angle_diff ||
+                LenDiff_Ratio > detector.param.light_max_angle_diff_ratio) continue;
+
+            pairs2++;
 
             //左右灯条中心点间距离
             double dis = distance(leftlight.center, rightlight.center);
@@ -125,16 +110,50 @@ std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInf
             double dis_ratio = dis / avgLen;
 
             //筛选符合条件的灯条
-            if (yDiff_Ratio > param_tool.light_max_y_diff_ratio ||
-                xDiff_Ratio > param_tool.light_min_x_diff_ratio ||
-                dis_ratio > param_tool.armor_max_aspect_ratio||
-                dis_ratio < param_tool.armor_min_aspect_ratio) continue;
+             if (yDiff_Ratio > detector.param.light_max_y_diff_ratio ||
+                 xDiff_Ratio < detector.param.light_min_x_diff_ratio ||
+                 dis_ratio > detector.param.armor_max_aspect_ratio||
+                 dis_ratio < detector.param.armor_min_aspect_ratio) {
+
+                 continue;
+             }
+
+            pairs3++;
 
             //确认装甲板类型
-            int armor_flag = dis_ratio > param_tool.armor_type_big_ratio ? BIG_ARMOR : SMALL_ARMOR;
+            int armor_flag = dis_ratio > detector.param.armor_type_big_ratio ? BIG_ARMOR : SMALL_ARMOR;
 
-            //
+            //Score
+            double rotationScore = 100;
+
+            // cv::Mat img = cv::Mat::ones(cv::Size(200,200),CV_8UC3);
+            // cv::circle(img,leftlight.center,2,cv::Scalar(0,0,255),-1);
+            // cv::circle(img,rightlight.center,2,cv::Scalar(0,0,255),-1);
+            // cv::imshow("debug",img);
+            // cv::waitKey(0);
+
+            ArmorDescriptor armor(leftlight, rightlight,armor_flag,detector._grayImg,rotationScore,detector.param);
+
+            armors.emplace_back(armor);
+            //break;
         }
     }
-    return {};
+    std::cout << "初始遴选个数： " << pairs1 << std::endl
+              << "条件2遴选后个数： " << pairs2 << std::endl
+              << "条件3遴选后个数： " << pairs3 << std::endl;
+    return armors;
+}
+
+void drawArmor(ArmorDetector &detector,cv::Mat &img) {
+    for (int i=0;i<detector._armors.size();i++) {
+        std::vector<cv::Point2i> points;
+        for (int j=0;j<4;j++) {
+            points.emplace_back(cv::Point(static_cast<int>(detector._armors[i].vertex[j].x),
+                                          static_cast<int>(detector._armors[i].vertex[j].y)));
+
+        }
+
+        cv::polylines(img, points, true, cv::Scalar(0, 255, 0), 2,8,0);
+    }
+    cv::imshow("armors", img);
 }

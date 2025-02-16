@@ -1,7 +1,7 @@
 //
 // Created by valmorx on 25-2-14.
 //
-
+#pragma once
 #ifndef LIGHTDESCRIPTOR_HPP
 #define LIGHTDESCRIPTOR_HPP
 
@@ -21,6 +21,7 @@ public:
 
     void printInfo();
     void drawLight(cv::Mat &img);
+    cv::RotatedRect rec() const;
 
 
     //int color;

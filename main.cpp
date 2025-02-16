@@ -7,6 +7,7 @@
 #include "LightDescriptor.hpp"
 #include<bits/stdc++.h>
 #include<opencv2/opencv.hpp>
+#include "ArmorDetector.hpp"
 
 int main() {
     cv::Mat img = cv::imread("../PhotoLib/Armor03.jpg"); // 读取图像
@@ -17,7 +18,8 @@ int main() {
         return -1;
     }
 
-    func_armorDetect(img);
+    ArmorDetector detector;
+    func_armorDetect(img,detector);
 
     cv::waitKey(0);
 }
