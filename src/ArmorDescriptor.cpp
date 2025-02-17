@@ -40,7 +40,6 @@ ArmorDescriptor::ArmorDescriptor(const LightDescriptor &leftLight,const LightDes
     this->lightPairs[0] = leftLight.rec();
     this->lightPairs[1] = rightLight.rec();
     this->armortype = armorType;
-    //getFrontImg(roi_gray_img); //等所有完成再确认
     this->rotationScore = rotationScore;
 
     //灯条高度扩大两倍画旋转矩形
@@ -67,6 +66,7 @@ ArmorDescriptor::ArmorDescriptor(const LightDescriptor &leftLight,const LightDes
     double normalized_area = cv::contourArea(vertex) / param.area_normalized_base;
     sizeScore = exp(normalized_area);
 
+    getFrontImg(roi_gray_img); //等所有完成再确认
 
 }
 
