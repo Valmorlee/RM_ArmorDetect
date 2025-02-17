@@ -8,6 +8,9 @@
 #include "LightDescriptor.hpp"
 #include "function.hpp"
 
+#define BLUE 0
+#define RED 1
+
 Parameter::Parameter() {
 
 
@@ -21,7 +24,7 @@ Parameter::Parameter() {
     light_max_y_diff_ratio = 2; //最大灯条y轴差比
 
     enemy_flag = 1; //发现敌方状态
-    enemy_color = 0; //默认为蓝色
+    enemy_color = BLUE; //默认为蓝色
 
     armor_min_aspect_ratio = 1; //灯条相距距离与长度最大比值
     armor_max_aspect_ratio = 5; //灯条相距距离与长度最小比值

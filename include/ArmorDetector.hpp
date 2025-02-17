@@ -13,19 +13,37 @@
 
 #endif //ARMORDETECTOR_HPP
 
+#define BLUE 0
+#define RED 1
 
 class ArmorDetector {
 public:
+
+    bool is_timeMonitor = true ; //帧延迟监控开关
 
     ArmorDetector() {
 
     }
 
-    void init() {
+    void init(int color_self) {
+        if (color_self == RED) {
+            _enemy_color = BLUE;
+            _self_color = RED;
+        }else {
+            _enemy_color = RED;
+            _self_color = BLUE;
+        }
 
+        std::cout<<"machine init complete!"<<std::endl;
     }
 
-    void loadImg() {
+    void loadImg(cv::Mat& img) {
+        _srcImg = img;
+
+        cv::Rect imgBound = cv::Rect(cv::Point(50,50),cv::Point(_srcImg.cols-50,_srcImg.rows-50));
+
+        _roi=imgBound;
+        _roiImg = _srcImg(_roi).clone(); //原点坐标会移动到裁剪的左上角
 
     }
 
@@ -45,6 +63,5 @@ public:
     cv::Mat _roiImg;
     cv::Mat _grayImg;
 
-
-
 };
+

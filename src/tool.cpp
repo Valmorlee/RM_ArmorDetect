@@ -138,9 +138,13 @@ std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInf
             //break;
         }
     }
+
+    /*
     std::cout << "初始遴选个数： " << pairs1 << std::endl
               << "条件2遴选后个数： " << pairs2 << std::endl
               << "条件3遴选后个数： " << pairs3 << std::endl;
+
+    */
     return armors;
 }
 
