@@ -19,8 +19,8 @@
 class ArmorDetector {
 public:
 
-    bool is_timeMonitor = true ; //帧延迟监控开关
-    bool is_debug = false ; //调试开关
+    bool is_timeMonitor = false ; //帧延迟监控开关
+    bool is_debug = false; //调试开关
 
     ArmorDetector() {
 
@@ -40,11 +40,13 @@ public:
 
     void loadImg(cv::Mat& img) {
         _srcImg = img;
+        _displayImg = img.clone();
 
         cv::Rect imgBound = cv::Rect(cv::Point(50,50),cv::Point(_srcImg.cols-50,_srcImg.rows-50));
 
         _roi=imgBound;
         _roiImg = _srcImg(_roi).clone(); //原点坐标会移动到裁剪的左上角
+
 
     }
 
@@ -63,6 +65,8 @@ public:
     cv::Mat _srcImg;
     cv::Mat _roiImg;
     cv::Mat _grayImg;
+
+    cv::Mat _displayImg;
 
 };
 

@@ -30,6 +30,7 @@ public:
 
     // 状态指标相关参数
     int enemy_flag;
+    int threshold_index;
 
     // 装甲板相关参数
     double armor_max_aspect_ratio; //灯条相距距离与长度最大比值

@@ -35,7 +35,7 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
         gettimeofday(&t1, NULL);
     }
 
-    cv::Mat img_origin=img.clone();
+    //cv::Mat img_origin=img.clone();
     cv::Mat img_gray,img_binary,img_result=img.clone();
 
     img_gray=func_colorDetect(img,detector);
@@ -46,9 +46,10 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
     //cv::imshow("img_gray",img_gray);
 
     //二值化
-    cv::threshold(img_gray,img_binary,120,255,cv::THRESH_BINARY);
+    cv::threshold(img_gray,img_binary,detector.param.threshold_index,255,cv::THRESH_BINARY);
 
     if (detector.is_debug) {
+        cv::imshow("img_gray",img_gray);
         cv::imshow("img_binary",img_binary);
     }
     cv::Mat element = cv::getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(3,3));
@@ -66,28 +67,28 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
     for (LightDescriptor x:lightInfos) {
         //x.printInfo(); //打印二维四点坐标以及角度和中心
         if (detector.is_debug) {
-            x.drawLight(img_origin);
+            x.drawLight(detector._displayImg);
         }
     }
 
     if (lightInfos.empty()) {
         param.enemy_flag = 0;
-        std::cout<<"未识别到装甲板"<<std::endl;
+        if (detector.is_debug) std::cout<<"未识别到装甲板"<<std::endl;
         return;
     }
 
     if (detector.is_debug) { //debug开关
-        cv::imshow("img_origin",img_origin);
+        cv::imshow("img_origin",detector._displayImg);
     }
 
     //匹配灯条对
     detector._armors=filterArmors(lightInfos,detector);
     if (detector._armors.empty()) {
-        std::cout << "armors empty!" << std::endl;
+        if (detector.is_debug) std::cout << "armors empty!" << std::endl;
         return;
     }
 
-    drawArmor(detector,img_origin);
+    drawArmor(detector,detector._displayImg);
 
     if (detector.is_timeMonitor) {
         gettimeofday(&t2, NULL);
@@ -95,5 +96,7 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
 
         std::cout << "Time: " << deltaT / 1000.0 << " ms"<< std::endl;
     }
+
+    drawPoint(detector._displayImg,detector._armors[0].centerPoint);
 
 }

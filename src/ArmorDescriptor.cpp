@@ -5,6 +5,7 @@
 #include "ArmorDescriptor.hpp"
 
 #include <Parameter.hpp>
+#include <tool.hpp>
 #include<bits/stdc++.h>
 
 #define BIG_ARMOR 1
@@ -16,6 +17,7 @@ ArmorDescriptor::ArmorDescriptor() {
     this->finalScore = 0;
     this->rotationScore = 0;
     this->sizeScore = 0;
+    this->centerPoint = cv::Point2f(0,0);
 
     this->armortype = UNKNOWN_ARMOR;
     vertex.resize(4);
@@ -80,6 +82,12 @@ ArmorDescriptor::ArmorDescriptor(const LightDescriptor &leftLight,const LightDes
     sizeScore = exp(normalized_area);
 
     getFrontImg(roi_gray_img); //等所有完成再确认
+
+    //x形
+    cv::Vec4f line1(vertex[0].x,vertex[0].y,vertex[2].x,vertex[2].y);
+    cv::Vec4f line2(vertex[1].x,vertex[1].y,vertex[3].x,vertex[3].y);
+
+    centerPoint = findIntersection(line1,line2);
 
 }
 
