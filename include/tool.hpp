@@ -27,3 +27,9 @@ std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInf
 
 //画装甲板：debug
 void drawArmor(ArmorDetector &detector,cv::Mat &img);
+
+//求两条直线的交点
+cv::Point2f findIntersection(cv::Vec4f line1, cv::Vec4f line2);
+
+//
+void drawPoint(const cv::Mat &img,cv::Point2f pt);

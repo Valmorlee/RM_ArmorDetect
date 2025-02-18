@@ -135,7 +135,7 @@ std::vector<ArmorDescriptor> filterArmors(std::vector<LightDescriptor> &lightInf
             ArmorDescriptor armor(leftlight, rightlight,armor_flag,detector._grayImg,rotationScore,detector.param);
 
             armors.emplace_back(armor);
-            //break;
+            break;
         }
     }
 
@@ -159,5 +159,34 @@ void drawArmor(ArmorDetector &detector,cv::Mat &img) {
 
         cv::polylines(img, points, true, cv::Scalar(0, 255, 0), 2,8,0);
     }
-    cv::imshow("armors", img);
+    if (detector.is_debug) {
+        cv::imshow("armors", img);
+    }
 }
+
+cv::Point2f findIntersection(cv::Vec4f line1, cv::Vec4f line2) {
+    // 提取直线的端点
+    float x1 = line1[0], y1 = line1[1];
+    float x2 = line1[2], y2 = line1[3];
+    float x3 = line2[0], y3 = line2[1];
+    float x4 = line2[2], y4 = line2[3];
+
+    // 计算行列式的值
+    float denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+
+    // 如果分母为0，说明直线平行或重合，没有唯一交点
+    if (denominator == 0) {
+        return cv::Point2f(-1, -1); // 返回一个无效点表示没有交点
+    }
+
+    // 计算交点坐标
+    float px = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / denominator;
+    float py = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / denominator;
+
+    return cv::Point2f(px, py);
+}
+
+void drawPoint(const cv::Mat &img, cv::Point2f pt) {
+    cv::circle(img, pt, 5, cv::Scalar(0, 0, 255), -1);
+}
+

@@ -5,6 +5,7 @@
 #include "ArmorDescriptor.hpp"
 
 #include <Parameter.hpp>
+#include <tool.hpp>
 #include<bits/stdc++.h>
 
 #define BIG_ARMOR 1
@@ -12,6 +13,19 @@
 #define UNKNOWN_ARMOR -1
 
 ArmorDescriptor::ArmorDescriptor() {
+    this->distScore = 0;
+    this->finalScore = 0;
+    this->rotationScore = 0;
+    this->sizeScore = 0;
+    this->centerPoint = cv::Point2f(0,0);
+
+    this->armortype = UNKNOWN_ARMOR;
+    vertex.resize(4);
+
+    for (int i=0;i<4;i++) {
+        vertex[i] = cv::Point2f(0,0);
+    }
+
 
 }
 
@@ -32,6 +46,7 @@ void ArmorDescriptor::getFrontImg(const cv::Mat &grayImg) {
     cv::Point2f src[4]{cv::Vec2f(lu),cv::Vec2f(ru),cv::Vec2f(rl),cv::Vec2f(ll)};
     cv::Point2f dst[4]{cv::Vec2f(0,0),cv::Vec2f(width,0),cv::Vec2f(width,height),cv::Vec2f(0,height)};
     const cv::Mat persMat = cv::getPerspectiveTransform(src,dst);
+
     cv::warpPerspective(grayImg,frontImg,persMat,cv::Size(width,height));
 
 }
@@ -67,6 +82,12 @@ ArmorDescriptor::ArmorDescriptor(const LightDescriptor &leftLight,const LightDes
     sizeScore = exp(normalized_area);
 
     getFrontImg(roi_gray_img); //等所有完成再确认
+
+    //x形
+    cv::Vec4f line1(vertex[0].x,vertex[0].y,vertex[2].x,vertex[2].y);
+    cv::Vec4f line2(vertex[1].x,vertex[1].y,vertex[3].x,vertex[3].y);
+
+    centerPoint = findIntersection(line1,line2);
 
 }
 

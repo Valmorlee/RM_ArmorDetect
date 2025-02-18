@@ -6,6 +6,7 @@
 #define ARMORDESCRIPTOR_HPP
 #include <LightDescriptor.hpp>
 
+
 #endif //ARMORDESCRIPTOR_HPP
 
 
@@ -30,6 +31,8 @@ public:
 
     std::vector<cv::Point2f> vertex; //装甲板的四个顶点
     cv::Mat frontImg; //单通道的装甲板图案
+
+    cv::Point2f centerPoint;
 
     int armortype;
 

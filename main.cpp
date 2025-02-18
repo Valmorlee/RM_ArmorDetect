@@ -11,13 +11,13 @@
 #include <time.h>
 #include <sys/time.h>
 
-int main() {
+void PhotoOption() {
     cv::Mat img = cv::imread("../PhotoLib/Armor03.jpg"); // 读取图像
     cv::imshow("img", img);
 
     if (img.empty()) {
         std::cout << "Empty" << std::endl;
-        return -1;
+        return ;
     }
 
     ArmorDetector detector;
@@ -30,6 +30,33 @@ int main() {
     //
     // cv::imshow("imgx", imgx);
 
+}
 
+void VideoOption() {
+    ArmorDetector detector;
+    detector.init(RED);
+    cv::VideoCapture cap("/home/valmorx/BaiduDiskDownload/ArmorVideo03.MOV");
+    cap.set(cv::CAP_PROP_FOURCC,cv::VideoWriter::fourcc('M','J','P','G'));
+
+    cv::Mat input;
+    while (true) {
+        cap.read(input);
+        if (input.empty()) {
+            std::cout << "inputEmpty" << std::endl;
+            return ;
+        }
+        detector.loadImg(input);
+        func_armorDetect(input,detector);
+        cv::imshow("img", detector._displayImg);
+
+        char c=cv::waitKey(30);
+        if (c==27) break;
+    }
+    cap.release();
+}
+
+int main() {
+    VideoOption();
+    //PhotoOption();
     cv::waitKey(0);
 }
