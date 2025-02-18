@@ -12,6 +12,18 @@
 #define UNKNOWN_ARMOR -1
 
 ArmorDescriptor::ArmorDescriptor() {
+    this->distScore = 0;
+    this->finalScore = 0;
+    this->rotationScore = 0;
+    this->sizeScore = 0;
+
+    this->armortype = UNKNOWN_ARMOR;
+    vertex.resize(4);
+
+    for (int i=0;i<4;i++) {
+        vertex[i] = cv::Point2f(0,0);
+    }
+
 
 }
 
@@ -32,6 +44,7 @@ void ArmorDescriptor::getFrontImg(const cv::Mat &grayImg) {
     cv::Point2f src[4]{cv::Vec2f(lu),cv::Vec2f(ru),cv::Vec2f(rl),cv::Vec2f(ll)};
     cv::Point2f dst[4]{cv::Vec2f(0,0),cv::Vec2f(width,0),cv::Vec2f(width,height),cv::Vec2f(0,height)};
     const cv::Mat persMat = cv::getPerspectiveTransform(src,dst);
+
     cv::warpPerspective(grayImg,frontImg,persMat,cv::Size(width,height));
 
 }

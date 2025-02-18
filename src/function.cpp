@@ -47,8 +47,10 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
 
     //二值化
     cv::threshold(img_gray,img_binary,120,255,cv::THRESH_BINARY);
-    cv::imshow("img_binary",img_binary);
 
+    if (detector.is_debug) {
+        cv::imshow("img_binary",img_binary);
+    }
     cv::Mat element = cv::getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(3,3));
     cv::dilate(img_binary,img_binary,element);
 
@@ -63,7 +65,9 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
     //debug输出
     for (LightDescriptor x:lightInfos) {
         //x.printInfo(); //打印二维四点坐标以及角度和中心
-        x.drawLight(img_origin);
+        if (detector.is_debug) {
+            x.drawLight(img_origin);
+        }
     }
 
     if (lightInfos.empty()) {
@@ -72,7 +76,9 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
         return;
     }
 
-    cv::imshow("img_origin",img_origin);
+    if (detector.is_debug) { //debug开关
+        cv::imshow("img_origin",img_origin);
+    }
 
     //匹配灯条对
     detector._armors=filterArmors(lightInfos,detector);

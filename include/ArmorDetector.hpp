@@ -20,6 +20,7 @@ class ArmorDetector {
 public:
 
     bool is_timeMonitor = true ; //帧延迟监控开关
+    bool is_debug = false ; //调试开关
 
     ArmorDetector() {
 
