@@ -52,7 +52,7 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
         cv::imshow("img_gray",img_gray);
         cv::imshow("img_binary",img_binary);
     }
-    cv::Mat element = cv::getStructuringElement(cv::MORPH_ELLIPSE,cv::Size(3,3));
+    cv::Mat element = cv::getStructuringElement(cv::MORPH_ELLIPSE,detector.param.light_dilate_size);
     cv::dilate(img_binary,img_binary,element);
 
     //寻找轮廓点
