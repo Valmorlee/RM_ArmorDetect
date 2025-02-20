@@ -4,6 +4,7 @@
 #pragma once
 #ifndef PARAMETER_HPP
 #define PARAMETER_HPP
+#include <opencv2/core/types.hpp>
 
 #endif //PARAMETER_HPP
 
@@ -18,6 +19,7 @@ public:
 
 
     // 灯条相关参数
+    cv::Size light_dilate_size;
     double light_min_area; //最小 [灯条矩形] 面积筛选参数
     double light_max_ratio; //最大 [灯条矩形] 长宽比
     double light_contour_min_solidity; //最小 [灯条轮廓椭圆] 拟合区域占比

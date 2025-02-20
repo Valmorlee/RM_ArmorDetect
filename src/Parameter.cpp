@@ -13,12 +13,12 @@
 
 Parameter::Parameter() {
 
-
-    light_min_area = 20; //最小 [灯条矩形] 面积筛选参数
-    light_max_ratio = 0.5; //最大 [灯条矩形] 长宽比
-    light_contour_min_solidity = 0.5; //最小 [灯条轮廓椭圆] 拟合区域占比（凸度）
+    light_dilate_size = cv::Size(5,5); //灯条膨胀核大小
+    light_min_area = 10; //最小 [灯条矩形] 面积筛选参数
+    light_max_ratio = 0.6; //最大 [灯条矩形] 长宽比
+    light_contour_min_solidity = 0.4; //最小 [灯条轮廓椭圆] 拟合区域占比（凸度）
     light_area_extend_ratio = 1.1; //灯条面积扩展比
-    light_max_angle_diff = 5; //最大灯条角度差
+    light_max_angle_diff = 4; //最大灯条角度差
     light_max_angle_diff_ratio = 0.2; //最大灯条角度差比
     light_min_x_diff_ratio = 0.5; //最小灯条x轴差比
     light_max_y_diff_ratio = 2; //最大灯条y轴差比

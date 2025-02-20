@@ -1,30 +1,34 @@
-# Project Log
+# 项目日志 --- 视觉部分
 
-### Recorder: *Valmorlee®*
-
-## Main Log: 
-
-> **#date.log 2025.2.17**
-
-**-> *Added:* main photo vision function complete**
-
-**-> *Added:* Debug Option: DebugOutput & DelayDetector**
-
-> **#date.log 2025.2.18**
-
-**-> *Added:* main video vision function complete**
-
-**-> *Added:* Aim Point function**
-
-**-> *Added:* optimize basic parameter**
-
+###  *Valmorlee®* 
 
 
 ---
-## Requirement Log;
+## 需求清单
 
 - [x] **armor vision: 对本地视频和摄像头的支持**
 - [ ] **armor vision: 利用roi前帧来减少资源使用与精准识别**
+- [ ] **armor vision: 利用卡尔曼滤波完成物体运动预测**
 
+
+---
+
+## 主要日志: 
+
+> **#date.log 2025.2.17**
+
+**-> *Added:* 已完成主要的本地图片识别方案**
+
+**-> *Added:* 调试可选项：调试开关和延迟帧数开关**
+
+
+
+> **#date.log 2025.2.18**
+
+**-> *Added:* 已完成主要本地视频和摄像头识别方案**
+
+**-> *Added:* 预瞄准准心点位功能**
+
+**-> *Added:* 优化基础调参**
 
 
