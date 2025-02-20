@@ -1,8 +1,19 @@
-# Project Log
+# 项目日志 --- 视觉部分
 
-### Recorder: *Valmorlee®*
+###  *Valmorlee®* 
 
-## Main Log: 
+
+---
+## 需求清单
+
+- [x] **armor vision: 对本地视频和摄像头的支持**
+- [ ] **armor vision: 利用roi前帧来减少资源使用与精准识别**
+- [ ] **armor vision: 利用卡尔曼滤波完成物体运动预测**
+
+
+---
+
+## 主要日志: 
 
 > **#date.log 2025.2.17**
 
@@ -19,14 +30,5 @@
 **-> *Added:* 预瞄准准心点位功能**
 
 **-> *Added:* 优化基础调参**
-
-
-
----
-## Requirement Log;
-
-- [x] **armor vision: 对本地视频和摄像头的支持**
-- [ ] **armor vision: 利用roi前帧来减少资源使用与精准识别**
-- [ ] **armor vision: 利用卡尔曼滤波完成物体运动预测**
 
 
