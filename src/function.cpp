@@ -86,6 +86,8 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
     if (detector._armors.empty()) {
         if (detector.is_debug) std::cout << "armors empty!" << std::endl;
         return;
+    }else {
+        func_KalmanPre(detector);
     }
 
     drawArmor(detector,detector._displayImg);
@@ -97,6 +99,33 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
         std::cout << "Time: " << deltaT / 1000.0 << " ms"<< std::endl;
     }
 
-    drawPoint(detector._displayImg,detector._armors[0].centerPoint);
+    for (int i=0;i<detector._armors.size();i++) {
+        drawPoint(detector._displayImg,detector._armors[i].centerPoint,cv::Scalar(0,0,255));
+    }
 
+
+}
+
+void func_KalmanPre(ArmorDetector &detector) {
+    if (!detector._armors.empty()) {
+        for (int i=0;i<detector._armors.size();i++) {
+
+            ArmorDescriptor& armor = detector._armors[i];
+            detector.measurement.at<float>(0) = armor.centerPoint.x;
+            detector.measurement.at<float>(1) = armor.centerPoint.y;
+
+            // 更新卡尔曼滤波器
+            detector.kf.correct(detector.measurement);
+
+            // 预测
+            detector.state = detector.kf.predict();
+            float predict_x = detector.state.at<float>(0);
+            float predict_y = detector.state.at<float>(1);
+
+            // 合成Point_pre
+            cv::Point2f Point_pre = cv::Point2f(predict_x, predict_y);
+            detector._armors[i].Point_pre = Point_pre;
+            drawPoint(detector._displayImg,Point_pre,cv::Scalar(255,0,255));
+        }
+    }
 }

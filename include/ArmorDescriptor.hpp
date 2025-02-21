@@ -33,6 +33,7 @@ public:
     cv::Mat frontImg; //单通道的装甲板图案
 
     cv::Point2f centerPoint;
+    cv::Point2f Point_pre;//下帧预测点
 
     int armortype;
 
