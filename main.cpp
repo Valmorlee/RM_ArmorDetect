@@ -35,7 +35,7 @@ void PhotoOption() {
 void VideoOption() {
     ArmorDetector detector;
     detector.init(RED);
-    cv::VideoCapture cap("/home/valmorx/BaiduDiskDownload/ArmorVideo02.MOV");
+    cv::VideoCapture cap("/home/valmorx/BaiduDiskDownload/ArmorVideo01.MOV");
     cap.set(cv::CAP_PROP_FOURCC,cv::VideoWriter::fourcc('M','J','P','G'));
 
     cv::Mat input;

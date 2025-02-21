@@ -28,7 +28,23 @@ public:
     ; //调试开关
 
     ArmorDetector() {
-
+        //init Kalman
+        kf = cv::KalmanFilter(4, 2, 0);
+        kf.transitionMatrix = (cv::Mat_<float>(4, 4) << 1, 0, 1, 0,
+                                                            0, 1, 0, 1,
+                                                            0, 0, 1, 0,
+                                                            0, 0, 0, 1);
+        kf.measurementMatrix = (cv::Mat_<float>(2, 4) << 1, 0, 0, 0,
+                                                              0, 1, 0, 0);
+        kf.processNoiseCov = (cv::Mat_<float>(4, 4) << 1e-2, 0, 0, 0,
+                                                            0, 1e-2, 0, 0,
+                                                            0, 0, 1, 0,
+                                                            0, 0, 0, 1) * 1e-2;
+        kf.measurementNoiseCov = (cv::Mat_<float>(2, 2) << 1e-1, 0,
+                                                            0, 1e-1) * 1e-1;
+        kf.errorCovPost = cv::Mat::eye(4, 4, CV_32F);
+        state = cv::Mat::zeros(4, 1, CV_32F);
+        measurement = cv::Mat::zeros(2, 1, CV_32F);
     }
 
     void init(int color_self) {
@@ -61,6 +77,10 @@ public:
 
     Parameter param;
     std::vector<ArmorDescriptor> _armors;
+
+    cv::KalmanFilter kf;
+    cv::Mat state; // (x, y, vx, vy)
+    cv::Mat measurement; // (x, y)
 
     int _enemy_color;
     int _self_color;

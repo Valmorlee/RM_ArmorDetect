@@ -186,7 +186,7 @@ cv::Point2f findIntersection(cv::Vec4f line1, cv::Vec4f line2) {
     return cv::Point2f(px, py);
 }
 
-void drawPoint(const cv::Mat &img, cv::Point2f pt) {
-    cv::circle(img, pt, 5, cv::Scalar(0, 0, 255), -1);
+void drawPoint(const cv::Mat &img, cv::Point2f pt,const cv::Scalar &color) {
+    cv::circle(img, pt, 5, color, -1);
 }
 

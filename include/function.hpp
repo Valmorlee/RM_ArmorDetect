@@ -15,3 +15,5 @@
 cv::Mat func_colorDetect(const cv::Mat &img,ArmorDetector &detector);
 
 void func_armorDetect(const cv::Mat &img,ArmorDetector &detector);
+
+void func_KalmanPre(ArmorDetector &detector);
