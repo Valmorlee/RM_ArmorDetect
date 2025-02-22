@@ -30,7 +30,7 @@ cv::Mat func_colorDetect(const cv::Mat &img,ArmorDetector &detector) {
 }
 
 void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
-    struct timeval t1, t2;
+    timeval t1, t2;
     if (detector.is_timeMonitor) {
         gettimeofday(&t1, NULL);
     }
@@ -107,7 +107,6 @@ void func_armorDetect(const cv::Mat &img, ArmorDetector &detector) {
 }
 
 void func_KalmanPre(ArmorDetector &detector) {
-    if (!detector._armors.empty()) {
         for (int i=0;i<detector._armors.size();i++) {
 
             ArmorDescriptor& armor = detector._armors[i];
@@ -127,5 +126,4 @@ void func_KalmanPre(ArmorDetector &detector) {
             detector._armors[i].Point_pre = Point_pre;
             drawPoint(detector._displayImg,Point_pre,cv::Scalar(255,0,255));
         }
-    }
 }

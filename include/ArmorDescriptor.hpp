@@ -20,6 +20,7 @@ public:
     ArmorDescriptor(const LightDescriptor &leftLight,const LightDescriptor &rightLight,int armorType,cv::Mat roi_gray_img,double rotationScore,Parameter param);
     ~ArmorDescriptor();
 
+    bool isArmor(); //结合frontimg判断
     void clear();
     void getFrontImg(const cv::Mat& grayImg);
 
