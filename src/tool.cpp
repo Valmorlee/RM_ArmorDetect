@@ -3,9 +3,7 @@
 //
 
 #include "tool.hpp"
-
 #include <ArmorDetector.hpp>
-
 #include "LightDescriptor.hpp"
 #include <Parameter.hpp>
 #include<bits/stdc++.h>

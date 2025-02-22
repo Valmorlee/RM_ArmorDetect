@@ -9,6 +9,7 @@
 #include <Parameter.hpp>
 #include <opencv2/opencv.hpp>
 #include"ArmorDescriptor.hpp"
+#include<eigen3/Eigen/Dense>
 
 
 #endif //ARMORDETECTOR_HPP

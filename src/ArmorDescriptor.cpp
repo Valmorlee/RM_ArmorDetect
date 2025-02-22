@@ -18,6 +18,7 @@ ArmorDescriptor::ArmorDescriptor() {
     this->rotationScore = 0;
     this->sizeScore = 0;
     this->centerPoint = cv::Point2f(0,0);
+    this->Point_pre = cv::Point2f(0,0);
 
     this->armortype = UNKNOWN_ARMOR;
     vertex.resize(4);
@@ -92,6 +93,27 @@ ArmorDescriptor::ArmorDescriptor(const LightDescriptor &leftLight,const LightDes
 }
 
 void ArmorDescriptor::clear() {
+    sizeScore = 0;
+    distScore = 0;
+    finalScore = 0;
+    rotationScore = 0;
+
+    for (int i=0;i<4;i++) {
+        vertex[i] = cv::Point2f(0,0);
+    }
+
+    frontImg = cv::Mat();
+    for (auto& rect : lightPairs) {
+        rect = cv::RotatedRect();
+    }
+
+    int armortype = UNKNOWN_ARMOR;
+    Point_pre = cv::Point2f(0,0);
+    centerPoint = cv::Point2f(0,0);
+
+}
+
+bool ArmorDescriptor::isArmor() {
 
 }
 
