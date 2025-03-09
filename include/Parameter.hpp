@@ -40,4 +40,31 @@ public:
     double armor_type_big_ratio; //大装甲板类型比值参数
     double armor_type_small_ratio; //小装甲板类型比值参数
     double area_normalized_base; //装甲板面积归一化基准参数
+
+    //onnx参数
+    std::string onnx_path;
+    int onnx_width;
+    int onnx_height;
+
+    std::vector<int> strides;
+    int reg_max;
+    std::vector<float> mean;
+    std::vector<float> std;
+
+    int num_class;
+    float nms_threshold;
+    float conf_threshold;
+
+    const int color_list[9][3] =
+    {
+        //{255 ,255 ,255}, //bg
+        {216, 82, 24},
+        {236, 176, 31},
+        {118, 171, 47},
+        {76, 189, 237},
+        {238, 19, 46},
+        {76, 76, 76},
+        {153, 153, 153},
+        {255, 0, 0},
+};
 };

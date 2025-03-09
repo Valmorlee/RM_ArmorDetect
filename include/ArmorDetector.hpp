@@ -17,6 +17,66 @@
 #define BLUE 0
 #define RED 1
 
+class object_rect {
+public:
+
+    object_rect() {
+        x = 0;
+        y = 0;
+        width = 0;
+        height = 0;
+    }
+
+    ~object_rect() = default;
+
+    int x;
+    int y;
+    int width;
+    int height;
+
+};
+
+class Info {
+public:
+    Info() {
+        x1 = 0;
+        y1 = 0;
+        x2 = 0;
+        y2 = 0;
+        conf = 0;
+        label = -1;
+    }
+
+    Info(float x1, float y1, float x2, float y2, float conf, int label) {
+        this->x1 = x1;
+        this->y1 = y1;
+        this->x2 = x2;
+        this->y2 = y2;
+        this->conf = conf;
+        this->label = label;
+    }
+
+    ~Info() = default;
+
+    float x1;
+    float y1;
+    float x2;
+    float y2;
+
+    float conf;
+    int label;
+};
+
+class CenterX {
+public:
+
+    int x;
+    int y;
+    int stride; //卷积采样间隔
+
+};
+
+
 class ArmorDetector {
 public:
 
@@ -46,6 +106,7 @@ public:
         kf.errorCovPost = cv::Mat::eye(4, 4, CV_32F);
         state = cv::Mat::zeros(4, 1, CV_32F);
         measurement = cv::Mat::zeros(2, 1, CV_32F);
+
     }
 
     void init(int color_self) {
@@ -61,6 +122,9 @@ public:
     }
 
     void loadImg(cv::Mat& img) {
+
+        this->YOLO_Center_Points.clear();
+
         _srcImg = img;
         _displayImg = img.clone();
 
@@ -93,6 +157,9 @@ public:
     cv::Mat _grayImg;
 
     cv::Mat _displayImg;
+
+    cv::dnn::Net myNet;
+    std::vector<cv::Point> YOLO_Center_Points;
 
 };
 
