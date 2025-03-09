@@ -6,11 +6,15 @@
 ---
 ## 需求清单
 
-- [x] **armor vision: 对本地视频和摄像头的支持**
-- [ ] **armor vision: 利用roi前帧来减少资源使用与精准识别**
-- [x] **armor vision: 利用卡尔曼滤波完成物体运动预测**
-- [ ] **armor vision: 完成通过frontImg来进一步识别是否是装甲板**
+- [x] **YOLO SUPPORT: 添加YOLO模型识别API**
 
+
+- [x] **vision: 对本地视频和摄像头的支持**
+- [ ] **vision: 利用roi前帧来减少资源使用与精准识别**
+- [x] **vision: 利用卡尔曼滤波完成物体运动预测**
+- [ ] **vision: 增加二值化筛选条件**
+- [ ] **vision: 算法放大优化降噪**
+- [ ] **vision: float改double优化内存**
 
 ---
 

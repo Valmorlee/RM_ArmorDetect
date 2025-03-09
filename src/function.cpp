@@ -127,3 +127,17 @@ void func_KalmanPre(ArmorDetector &detector) {
             drawPoint(detector._displayImg,Point_pre,cv::Scalar(255,0,255));
         }
 }
+
+void func_YoloDetect(const cv::Mat &img,ArmorDetector &detector) {
+
+    cv::Size dstSize = cv::Size(detector.param.onnx_width,detector.param.onnx_height);
+    object_rect effect_roi;
+    cv::Mat resized_img = img.clone();
+
+    yolo_resizeUniform(img,resized_img,dstSize,effect_roi,detector);
+
+    auto results = yolo_PreDetect(resized_img,detector);
+
+    cv::Mat final = yolo_draw_bboxes(img,results,effect_roi,detector);
+
+}

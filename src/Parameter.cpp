@@ -32,6 +32,19 @@ Parameter::Parameter() {
     armor_type_big_ratio = 3.2; //大装甲板类型比值参数
     armor_type_small_ratio = 2; //小装甲板类型比值参数
     area_normalized_base = 1000; //装甲板面积归一化基准参数
+
+    onnx_path = "../onnx_model/yoloRM.onnx";
+    onnx_width = 320;
+    onnx_height = 320;
+
+    strides = {8,16,32};
+    reg_max = 7;
+    mean = {103.53, 116.28, 123.675};
+    std = {57.375, 57.12, 58.395};
+
+    num_class = 9; // 识别类别数量
+    nms_threshold = 0.3;
+    conf_threshold = 0.3;
 }
 
 void Parameter::set_enemy_color(int color) {
