@@ -494,7 +494,7 @@ cv::Mat yolo_draw_bboxes(const cv::Mat &bgr, std::vector<Info> &bboxes, object_r
 
     for (size_t i = 0; i < bboxes.size(); i++)
     {
-        Info &bbox = bboxes[i]; // 每个检测框的信息 左上角的x y,右下角的x y,同时还有信度score 和 类别 label
+        Info &bbox = bboxes[i];
 
         if (detector.is_debug) {
             std::cout << "[" << bbox.x1 << " " << bbox.x2 << " " << bbox.y1 << " " << bbox.y2 << "] " << bbox.label << " " << 1.0*bbox.conf*100 << "%" << std::endl;

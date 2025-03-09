@@ -57,7 +57,7 @@ void YoloOption() {
     ArmorDetector detector;
     detector.init(RED);
 
-    cv::VideoCapture cap("/home/valmorx/下载/video.mp4");
+    cv::VideoCapture cap("/home/valmorx/BaiduDiskDownload/ArmorVideo01.MOV");
     cap.set(cv::CAP_PROP_FOURCC,cv::VideoWriter::fourcc('M','J','P','G'));
 
     std::string model_path = detector.param.onnx_path;
@@ -86,7 +86,7 @@ void YoloOption() {
         cv::imshow("img", detector._displayImg);
 
 
-        cv::waitKey(0);
+        //cv::waitKey(0);
 
         char c=cv::waitKey(30);
         if (c==27) break;
@@ -96,7 +96,7 @@ void YoloOption() {
     cap.release();
 }
 
-int main() {
+int main(int argc, char const *argv[]) {
     //VideoOption();
     //PhotoOption();
 
