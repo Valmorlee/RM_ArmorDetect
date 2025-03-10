@@ -7,8 +7,8 @@
 #include<opencv2/opencv.hpp>
 #include "ArmorDetector.hpp"
 
-void PhotoOption() {
-    cv::Mat img = cv::imread("../PhotoLib/Armor03.jpg"); // 读取图像
+void PhotoOption(const std::string &media_path) {
+    cv::Mat img = cv::imread(media_path); // 读取图像
     cv::imshow("img", img);
 
     if (img.empty()) {
@@ -28,10 +28,10 @@ void PhotoOption() {
 
 }
 
-void VideoOption() {
+void VideoOption(const std::string &media_path) {
     ArmorDetector detector;
     detector.init(RED);
-    cv::VideoCapture cap("/home/valmorx/BaiduDiskDownload/ArmorVideo01.MOV");
+    cv::VideoCapture cap(media_path);
     cap.set(cv::CAP_PROP_FOURCC,cv::VideoWriter::fourcc('M','J','P','G'));
 
     cv::Mat input;
@@ -53,11 +53,11 @@ void VideoOption() {
     cap.release();
 }
 
-void YoloOption() {
+void YoloOption(const std::string &media_path) {
     ArmorDetector detector;
     detector.init(RED);
 
-    cv::VideoCapture cap("/home/valmorx/BaiduDiskDownload/ArmorVideo01.MOV");
+    cv::VideoCapture cap(media_path);
     cap.set(cv::CAP_PROP_FOURCC,cv::VideoWriter::fourcc('M','J','P','G'));
 
     std::string model_path = detector.param.onnx_path;
@@ -97,9 +97,33 @@ void YoloOption() {
 }
 
 int main(int argc, char const *argv[]) {
+
+    if (argc != 3) {
+        std::cout<<"----------\nUsage: [/main.cpp] [option] [media_path]\n----------"<<std::endl;
+        std::cout<<"For More Options:\nNumber\t1 - Photo\nNumber\t2 - Video\nNumber\t3 - Yolo"<<std::endl;
+        return -1;
+    }
+
     //VideoOption();
     //PhotoOption();
 
-    YoloOption();
+    int optionX = std::stoi(argv[1]);
+    std::string media_path = argv[2];
+
+    switch (optionX) {
+        case 1:
+            PhotoOption(media_path);
+            break;
+        case 2:
+            VideoOption(media_path);
+            break;
+        case 3:
+            YoloOption(media_path);
+            break;
+        default:
+            std::cout<<"Wrong Option: Please try again!"<<std::endl;
+            return -2;
+    }
+
     cv::waitKey(0);
 }
