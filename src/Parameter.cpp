@@ -33,7 +33,7 @@ Parameter::Parameter() {
     armor_type_small_ratio = 2; //小装甲板类型比值参数
     area_normalized_base = 1000; //装甲板面积归一化基准参数
 
-    onnx_path = "../onnx_model/yoloRM.onnx";
+    onnx_path = "./onnx_model/yoloRM.onnx";
     onnx_width = 320;
     onnx_height = 320;
 

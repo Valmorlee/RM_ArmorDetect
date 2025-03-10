@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 project(RM_ArmorDetect)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
 # 旧协议指令屏蔽
 if(POLICY CMP0146)
@@ -35,6 +35,7 @@ set_target_properties(Local_Lib_Shared PROPERTIES OUTPUT_NAME "Local_Lib")
 set_target_properties(Local_Lib_Static PROPERTIES OUTPUT_NAME "Local_Lib")
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/../lib)
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/out)
 
 add_executable(RM_ArmorDetect
         main.cpp
